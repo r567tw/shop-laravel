@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     //indexPage
     public function indexPage(){
-        return 'This is a indexPage';
+        return view('welcome');
     }
 }
