@@ -7,6 +7,7 @@ use Validator;
 use Hash;
 use Mail;
 use App\User;
+use DB;
 
 class UserAuthController extends Controller
 {
@@ -57,17 +58,48 @@ class UserAuthController extends Controller
     
     // Route::get('/sign-in','UserAuthController@signInPage');
     public function signInPage(){
-        return 'SignInPage';
+        
+        return view('auth.signIn')->withTitle('登入');
     }
 
     // Route::post('/sign-in','UserAuthController@signInProcess');
     public function signInProcess(){
-        return 'sIGNiNprocess';
+        
+        $input = request()->all();
+        $rules =[
+            'email'=>['required','max:150','email'],
+            'password'=>['required','min:6']
+        ];
+
+        $validator = Validator::make($input,$rules);
+
+        if ($validator->fails())
+        {
+            return redirect('/user/auth/sign-in')->withErrors($validator)
+                ->withInput();
+        }
+        //DB::enableQueryLog();
+        $User = User::where('email',$input['email'])->firstOrFail();
+        //dd(DB::getQueryLog());
+        $is_password_correct = Hash::check($input['password'],$User->password);
+
+        if(!$is_password_correct)
+        {
+            $error_msg = ['msg'=>['密碼驗證錯誤']];
+            return redirect('/user/auth/sign-in')->withErrors($error_msg)->withInput();
+        }
+        else
+        {
+            session()->put('user_id',$User->id);
+            return 'Log in!!';
+        }
+
     }
 
     // Route::get('sign-out','UserAuthController@signOut');
     public function signOut()
     {
-        return 'SIGNOUT';
+        session()->forget('user_id');
+        return redirect('/');
     }
 }
