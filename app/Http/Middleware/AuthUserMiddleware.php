@@ -27,7 +27,7 @@ class AuthUserMiddleware
         
         if(!$is_allow_access)
         {
-            return redirect()->to('/');
+            return redirect()->to('/user/auth/sign-in');
         }
         
         return $next($request);

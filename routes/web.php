@@ -37,8 +37,8 @@ Route::group(['prefix' => 'merchandise'], function() {
 
     //merchandise item
     Route::group(['prefix' => '{id}'], function() {
-        Route::get('/edit','MerchandiseController@merchandiseItemEditPage');
-        Route::put('/','MerchandiseController@merchandiseItemUpdateProcess');
+        Route::get('/edit','MerchandiseController@merchandiseItemEditPage')->middleware(['user.auth.admin']);
+        Route::put('/','MerchandiseController@merchandiseItemUpdateProcess')->middleware(['user.auth.admin']);
         Route::get('/','MerchandiseController@merchandiseItemPage')->middleware(['user.auth']);
         Route::post('/buy','MerchandiseController@merchandiseItemBuyProcess')->middleware(['user.auth']);
     });
