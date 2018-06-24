@@ -13,7 +13,9 @@
 
         {{-- 錯誤訊息模板元件 --}}
         @include('components.validationErrorMessage')
-
+        <div class="row">
+        <a href="{{ url('user/auth/facebook-sign-in')}}">facebook登入</a>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <form action="/user/auth/sign-in" method="post">

@@ -21,6 +21,8 @@ Route::group(['prefix'=>'user'],function(){
         Route::post('/sign-up','UserAuthController@signUpProcess');
         Route::get('/sign-in','UserAuthController@signInPage');
         Route::post('/sign-in','UserAuthController@signInProcess');
+        Route::get('/facebook-sign-in','UserAuthController@facebookSignInProcess');
+        Route::get('/facebook-sign-in-callback','UserAuthController@facebookSignInCallbackProcess');
         Route::get('sign-out','UserAuthController@signOut');
     });
 });

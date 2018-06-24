@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use Validator;
 use Hash;
 use Mail;
-use App\User;
 use DB;
+use Socialite;
 
 class UserAuthController extends Controller
 {
@@ -101,5 +102,77 @@ class UserAuthController extends Controller
     {
         session()->forget('user_id');
         return redirect('/');
+    }
+
+    public function facebookSignInProcess(){
+        //return 'facebookSignInProcess';
+
+        $redirect_url = env('FB_REDIRECT');
+
+        return Socialite::driver('facebook')
+        ->scopes(['email'])
+        ->redirectUrl($redirect_url)
+        ->redirect();
+    }
+
+    public function facebooksignInCallbackProcess(){
+
+        if(request()->error == 'access_denied'){
+            throw new Exception('授權失敗，存取錯誤');
+        }
+
+        $redirect_url = env('FB_REDIRECT');
+
+        $FacebookUser = Socialite::driver('facebook')
+        ->user();
+        //dd($FacebookUser);
+        $facebook_email = $FacebookUser->email;
+
+        if(is_null($facebook_email)){
+            throw new Exception('未授權取得email');
+        }
+
+        //get facebook data
+        $facebook_id = $FacebookUser->id;
+        $facebook_name = $FacebookUser->name;
+
+        $User = User::where('facebook_id',$facebook_id)->first();
+
+        if(is_null($User)){
+            $User = User::where('email',$facebook_email)->first();
+
+            if(!is_null($User))
+            {
+                $User->facebook_id = $facebook_id;
+                $User->save();
+            }
+            else
+            {
+                $input =[
+                    'email' => $facebook_email,
+                    'name' => $facebook_name,
+                    'password' => uniqid(),
+                    'facebook_id' => $facebook_id,
+                    'type' =>'G'
+                ];
+
+                $input['password'] = Hash::make($input['password']);
+                $User = User::create($input);
+
+                $mail_binding = [
+                    'nickname' => $input['name']
+                ];
+
+                Mail::send('email.signUpEmailNotification',$mail_binding,function($mail) use ($input){
+                    $mail->to($input['email']);
+                    $mail->from('shop@laravel.com');
+                    $mail->subject('恭喜使用facebook註冊成功！');
+                });
+            }
+        }
+
+        session()->put('user_id',$User->id);
+        //重新導向到原本使用者造訪頁面，沒有常識造訪頁則重新導向首頁
+        return redirect()->intended('/');
     }
 }
