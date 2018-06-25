@@ -50,7 +50,7 @@ class UserAuthController extends Controller
             'email' => $input['email']
         ];
 
-        SendSignUpMailJob::dispatch($mail_binding);
+        SendSignUpMailJob::dispatch($mail_binding)->onQueue('high');
 
         return redirect('/user/auth/sign-in');
     }

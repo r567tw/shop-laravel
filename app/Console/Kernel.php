@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('shop:sendLatestMerchandiseNewsletter')
+        ->fridays()
+        ->dailyAt('18:00');
     }
 
     /**

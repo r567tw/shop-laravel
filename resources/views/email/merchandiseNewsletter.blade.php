@@ -1,5 +1,5 @@
 <!-- 檔案位置：resources/views/email/merchandiseNewsletter.blade.php -->
-<h1>Hi {{ $User->nickname }}，以下是最新的商品</h1>
+<h1>Hi {{ $User->name }}，以下是最新的商品</h1>
 
 <table border="1">
     <tr>
