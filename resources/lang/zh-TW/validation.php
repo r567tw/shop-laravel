@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -12,100 +12,90 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
-    'array'                => 'The :attribute must be an array.',
-    'before'               => 'The :attribute must be a date before :date.',
-    'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',
+    
+    'accepted'             => '必須接受 :attribute。',
+    'active_url'           => ':attribute 並非一個有效的網址。',
+    'after'                => ':attribute 必須要在 :date 之後。',
+    'alpha'                => ':attribute 只能以字母組成。',
+    'alpha_dash'           => ':attribute 只能以字母、數字及斜線組成。',
+    'alpha_num'            => ':attribute 只能以字母及數字組成。',
+    'array'                => ':attribute 必須為陣列。',
+    'before'               => ':attribute 必須要在 :date 之前。',
     'between'              => [
-        'numeric' => 'The :attribute must be between :min and :max.',
-        'file'    => 'The :attribute must be between :min and :max kilobytes.',
-        'string'  => 'The :attribute must be between :min and :max characters.',
-        'array'   => 'The :attribute must have between :min and :max items.',
+        'numeric' => ':attribute 必須介於 :min 至 :max 之間。',
+        'file'    => ':attribute 必須介於 :min 至 :max kb 之間。 ',
+        'string'  => ':attribute 必須介於 :min 至 :max 個字元之間。',
+        'array'   => ':attribute: 必須有 :min - :max 個元素。',
     ],
-    'boolean'              => 'The :attribute field must be true or false.',
-    'confirmed'            => 'The :attribute confirmation does not match.',
-    'date'                 => 'The :attribute is not a valid date.',
-    'date_format'          => 'The :attribute does not match the format :format.',
-    'different'            => 'The :attribute and :other must be different.',
-    'digits'               => 'The :attribute must be :digits digits.',
-    'digits_between'       => 'The :attribute must be between :min and :max digits.',
+    'boolean'              => ':attribute 必須為bool值。',
+    'confirmed'            => ':attribute 確認欄位的輸入並不相符。',
+    'date'                 => ':attribute 並非一個有效的日期。',
+    'date_format'          => ':attribute 與 :format 格式不相符。',
+    'different'            => ':attribute 與 :other 必須不同。',
+    'digits'               => ':attribute 必須是 :digits 位數字。',
+    'digits_between'       => ':attribute 必須介於 :min 至 :max 位數字。',
+    'before_or_equal'      => ':attribute 必須小於 :date 。',
     'dimensions'           => 'The :attribute has invalid image dimensions.',
-    'distinct'             => 'The :attribute field has a duplicate value.',
-    'email'                => 'The :attribute must be a valid email address.',
-    'exists'               => 'The selected :attribute is invalid.',
-    'file'                 => 'The :attribute must be a file.',
-    'filled'               => 'The :attribute field must have a value.',
-    'image'                => 'The :attribute must be an image.',
-    'in'                   => 'The selected :attribute is invalid.',
-    'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
-    'ip'                   => 'The :attribute must be a valid IP address.',
-    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
-    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
-    'json'                 => 'The :attribute must be a valid JSON string.',
+    'distinct'             => ':attribute 已經存在。',
+    'email'                => ':attribute 的格式無效。',
+    'exists'               => '所選擇的 :attribute 選項無效。',
+    'filled'               => ':attribute 不能留空。',
+    'image'                => ':attribute 必須是一張圖片。',
+    'in'                   => '所選擇的 :attribute 選項無效。',
+    'in_array'             => ':attribute 沒有在 :other 中。',
+    'integer'              => ':attribute 必須是一個整數。',
+    'ip'                   => ':attribute 必須是一個有效的 IP 地址。',
+    'json'                 => ':attribute 必須是正確的 JSON 字串。',
     'max'                  => [
-        'numeric' => 'The :attribute may not be greater than :max.',
-        'file'    => 'The :attribute may not be greater than :max kilobytes.',
-        'string'  => 'The :attribute may not be greater than :max characters.',
-        'array'   => 'The :attribute may not have more than :max items.',
+        'numeric' => ':attribute 不能大於 :max。',
+        'file'    => ':attribute 不能大於 :max kb。',
+        'string'  => ':attribute 不能多於 :max 個字元。',
+        'array'   => ':attribute 最多有 :max 個元素。',
     ],
-    'mimes'                => 'The :attribute must be a file of type: :values.',
-    'mimetypes'            => 'The :attribute must be a file of type: :values.',
+    'mimes'                => ':attribute 必須為 :values 的檔案。',
     'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
-        'file'    => 'The :attribute must be at least :min kilobytes.',
-        'string'  => 'The :attribute must be at least :min characters.',
-        'array'   => 'The :attribute must have at least :min items.',
+        'numeric' => ':attribute 不能小於 :min。',
+        'file'    => ':attribute 不能小於 :min kb。',
+        'string'  => ':attribute 不能小於 :min 個字元。',
+        'array'   => ':attribute 至少有 :min 個元素。',
     ],
-    'not_in'               => 'The selected :attribute is invalid.',
-    'not_regex'            => 'The :attribute format is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
-    'present'              => 'The :attribute field must be present.',
-    'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field 不能留空',
-    'required_if'          => 'The :attribute field is required when :other is :value.',
-    'required_unless'      => 'The :attribute field is required unless :other is in :values.',
-    'required_with'        => 'The :attribute field is required when :values is present.',
-    'required_with_all'    => 'The :attribute field is required when :values is present.',
-    'required_without'     => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same'                 => 'The :attribute and :other must match.',
+    'not_in'               => '所選擇的 :attribute 選項無效。',
+    'numeric'              => ':attribute 必須為一個數字。',
+    'present'              => ':attribute 必須存在。',
+    'regex'                => ':attribute 的格式錯誤。',
+    'required'             => ':attribute 不能留空。',
+    'required_if'          => '當 :other 是 :value 時 :attribute 不能留空。',
+    'required_unless'      => '當 :other 不是 :value 時 :attribute 不能留空。',
+    'required_with'        => '當 :values 出現時 :attribute 不能留空。',
+    'required_with_all'    => '當 :values 都出現時 :attribute 不能為空。',
+    'required_without'     => '當 :values 留空時 :attribute field 不能留空。',
+    'required_without_all' => '當 :values 都不出現時 :attribute 不能留空。',
+    'same'                 => ':attribute 與 :other 必須相同。',
     'size'                 => [
-        'numeric' => 'The :attribute must be :size.',
-        'file'    => 'The :attribute must be :size kilobytes.',
-        'string'  => 'The :attribute must be :size characters.',
-        'array'   => 'The :attribute must contain :size items.',
+        'numeric' => ':attribute 的大小必須是 :size。',
+        'file'    => ':attribute 的大小必須是 :size kb。',
+        'string'  => ':attribute 必須是 :size 個字元。',
+        'array'   => ':attribute 必須是 :size 個元素。',
     ],
-    'string'               => 'The :attribute must be a string.',
-    'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
-    'uploaded'             => 'The :attribute failed to upload.',
-    'url'                  => 'The :attribute format is invalid.',
-
+    'string'               => ':attribute 必須是一個字串。',
+    'timezone'             => ':attribute 必須是一個正確的時區值。',
+    'unique'               => ':attribute 已經存在。',
+    'url'                  => ':attribute 的格式錯誤。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
     |
     | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
+    | convention 'attribute.rule' to name the lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
-    'custom' => [
+    'custom'               => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -113,15 +103,21 @@ return [
     |
     | The following language lines are used to swap attribute place-holders
     | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
+    | of 'email'. This simply helps us make messages a little cleaner.
     |
     */
-
-    'attributes' => [
-        'name' => '名稱',
-        'email' =>'電子信箱',
-        'password' =>'密碼',
-        'password_confirmation'=>'密碼確認'
+    'attributes'           => [
+        // 會員
+        'nickname'              => '暱稱',
+        'email'                 => '電子信箱',
+        'password'              => '密碼',
+        'password_confirmation' => '確認密碼',
+        // 商品
+        'name'            => '商品名稱',
+        'name_en'         => '商品英文名稱',
+        'introduction'    => '商品介紹',
+        'introduction_en' => '商品英文介紹',
+        'price'           => '商品價格',
+        'remain_count'    => '商品剩餘數量',
     ],
-
 ];

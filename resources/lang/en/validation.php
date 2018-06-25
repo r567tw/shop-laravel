@@ -65,7 +65,6 @@ return [
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'not_regex'            => 'The :attribute format is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
@@ -117,6 +116,19 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'           => [
+        // 會員
+        'nickname'              => 'Nickname',
+        'email'                 => 'Email',
+        'password'              => 'Password',
+        'password_confirmation' => 'Confirm Password',
+        // 商品
+        'name'            => 'Name',
+        'name_en'         => 'English Name',
+        'introduction'    => 'Introduction',
+        'introduction_en' => 'English Introduction',
+        'price'           => 'Price',
+        'remain_count'    => 'Remain Number',
+    ],
 
 ];
