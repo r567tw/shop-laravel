@@ -90,7 +90,7 @@ class UserAuthController extends Controller
         else
         {
             session()->put('user_id',$User->id);
-            return 'Log in!!';
+            return redirect('/');
         }
 
     }

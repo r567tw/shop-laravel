@@ -13,5 +13,6 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         //
+        'shop_laravel_language' 
     ];
 }
