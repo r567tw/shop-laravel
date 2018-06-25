@@ -11,6 +11,7 @@ use App\Http\Requests\BuyMerchandiseRequest;
 use Validator;
 use DB;
 use Log;
+use Image;
 
 class MerchandiseController extends Controller
 {
@@ -111,6 +112,20 @@ class MerchandiseController extends Controller
         
         $Merchandise = Merchandise::findOrFail($id);
         $input = $request->all();
+
+        //圖片處理
+        if(isset($input['photo'])){
+            $photo = $input['photo'];
+            $file_extension = $photo->getClientOriginalExtension();
+            $file_name = uniqid().'.'.$file_extension;
+            $file_relative_path = 'images/merchandise/'.$file_name;
+            $file_path = public_path($file_relative_path);
+            
+
+            $image = Image::make($photo)->fit(450,300)->save($file_path);
+            $input['photo'] = $file_relative_path;
+        }
+
         $Merchandise->update($input);
         $Merchandise->save();
 
