@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use Validator;
 use Hash;
-use Mail;
 use DB;
 use Socialite;
+use Mail;
+use App\Jobs\SendSignUpMailJob;
 
 class UserAuthController extends Controller
 {
@@ -28,7 +29,7 @@ class UserAuthController extends Controller
         $rules = [
             'name'=>['required','max:50'],
             'email'=>['required','max:150','email'],
-            'password'=>['required','max:6','same:password_confirmation'],
+            'password'=>['required','min:6','same:password_confirmation'],
             'password_confirmation'=>['required','min:6'],
             'type' => ['required','in:G,A']
         ];
@@ -45,14 +46,11 @@ class UserAuthController extends Controller
         $user = User::create($input);
         //send email to do
         $mail_binding =[
-            'nickname' => $input['name']
+            'nickname' => $input['name'],
+            'email' => $input['email']
         ];
 
-        Mail::send('email.signUpEmailNotification',$mail_binding,function($mail) use ($input){
-            $mail->to($input['email']);
-            $mail->from('admin@shop-laravel.com');
-            $mail->subject('恭喜註冊shop-laravel 成功');
-        });
+        SendSignUpMailJob::dispatch($mail_binding);
 
         return redirect('/user/auth/sign-in');
     }

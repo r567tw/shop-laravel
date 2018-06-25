@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','HomeController@indexPage');
+Route::get('/','MerchandiseController@merchandiseListPage');
 
 //USER
 Route::group(['prefix'=>'user'],function(){
