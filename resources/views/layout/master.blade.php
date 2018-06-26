@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>@yield('title') - Shop Laravel</title>
+    <title>@yield('title') - {{ config('app.name') }}</title>
         <script src="/assets/js/jquery-2.2.4.min.js" defer></script>
         <script src="/assets/js/bootstrap.min.js" defer></script>
         <script src="/assets/js/js.cookie.js" defer></script>
@@ -27,6 +27,8 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">{{ trans('shop.home') }}</a></li>
+                    <li><a href="#">{{ trans('blog.home') }}</a></li>
+                    <li><a href="/merchandise">{{ trans('shop.merchandise.list') }}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -60,8 +62,15 @@
                         </li>
                         <li><a href="/user/auth/sign-out">{{ trans('shop.auth.sign-out') }}</a></li>
                     @else
-                        <li><a href="/user/auth/sign-in">{{ trans('shop.auth.sign-in') }}</a></li>
-                        <li><a href="/user/auth/facebook-sign-in">{{ trans('shop.auth.facebook-sign-in') }}</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ trans('shop.auth.sign-in') }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user/auth/sign-in">{{ trans('shop.auth.general-sign-in') }}</a></li>
+                                <li><a href="/user/auth/facebook-sign-in">{{ trans('shop.auth.facebook-sign-in') }}</a></li>
+                            </ul>
+                        </li>
                         <li><a href="/user/auth/sign-up">{{ trans('shop.auth.sign-up') }}</a></li>
                     @endif
                 </ul>

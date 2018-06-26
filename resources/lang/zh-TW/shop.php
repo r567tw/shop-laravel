@@ -39,6 +39,7 @@ return [
     'auth'        => [
         'sign-out'         => '登出',
         'sign-in'          => '登入',
+        'general-sign-in'  => '一般登入',
         'sign-up'          => '註冊',
         'facebook-sign-in' => 'Facebook 登入',
     ],

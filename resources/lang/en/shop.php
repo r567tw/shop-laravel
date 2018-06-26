@@ -38,6 +38,7 @@ return [
     'auth'        => [
         'sign-out'         => 'Sign Out',
         'sign-in'          => 'Sign In',
+        'general-sign-in'  => 'General Sign In',
         'sign-up'          => 'Sign Up',
         'facebook-sign-in' => 'Facebook Sign In',
     ],
