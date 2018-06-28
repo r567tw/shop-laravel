@@ -36,6 +36,11 @@ class MerchandiseController extends Controller
         return view('merchandise.listMerchandise',$binding);    
     }
 
+    public function create()
+    {
+        return 'Create Merchandise Page';
+    }
+
     // Route::get('/create','MerchandiseController@merchandiseCreateProcess');
     public function merchandiseCreateProcess()
     {
