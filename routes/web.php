@@ -11,19 +11,15 @@
 |
 */
 
-Route::get('/','HomeController@indexPage');
+Route::get('/','HomeController@index');
+Route::get('/home','HomeController@index');
 
 //USER
+Auth::routes();
 Route::group(['prefix'=>'user'],function(){
-    //USER VALIDATE
     Route::group(['prefix'=>'auth'],function(){
-        Route::get('/sign-up','UserAuthController@signUpPage');
-        Route::post('/sign-up','UserAuthController@signUpProcess');
-        Route::get('/sign-in','UserAuthController@signInPage');
-        Route::post('/sign-in','UserAuthController@signInProcess');
         Route::get('/facebook-sign-in','UserAuthController@facebookSignInProcess');
         Route::get('/facebook-sign-in-callback','UserAuthController@facebookSignInCallbackProcess');
-        Route::get('sign-out','UserAuthController@signOut');
     });
 });
 
@@ -32,7 +28,7 @@ Route::group(['prefix' => 'merchandise'], function() {
     Route::get('/','MerchandiseController@merchandiseListPage');
     //merchandise item
     Route::group(['prefix' => '{id}'], function() {
-        Route::post('/buy','MerchandiseController@merchandiseItemBuyProcess')->middleware(['user.auth']);
+        Route::post('/buy','MerchandiseController@merchandiseItemBuyProcess')->middleware(['auth']);
     });
 });
 
@@ -59,3 +55,4 @@ Route::group(['prefix'=>'admin'],function(){
 
     //merchandise item
 });
+

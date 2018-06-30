@@ -9,98 +9,99 @@ use Hash;
 use DB;
 use Socialite;
 use Mail;
+use Auth;
 use App\Jobs\SendSignUpMailJob;
 
 class UserAuthController extends Controller
 {
-    // Route::get('/sign-up','UserAuthController@signUpPage');
-    public function signUpPage(){
-        $binding =[
-            'title' => '註冊'
-        ];
+    // // Route::get('/sign-up','UserAuthController@signUpPage');
+    // public function signUpPage(){
+    //     $binding =[
+    //         'title' => '註冊'
+    //     ];
 
-        return view('auth.signUp',$binding);
-    }
+    //     return view('auth.signUp',$binding);
+    // }
 
     // Route::post('/sign-up','UserAuthController@signUpProcess');
-    public function signUpProcess(){
-        //GET input data
-        $input = request()->all();
-        $rules = [
-            'name'=>['required','max:50'],
-            'email'=>['required','max:150','email'],
-            'password'=>['required','min:6','same:password_confirmation'],
-            'password_confirmation'=>['required','min:6'],
-            'type' => ['required','in:G,A']
-        ];
+    // public function signUpProcess(){
+    //     //GET input data
+    //     $input = request()->all();
+    //     $rules = [
+    //         'name'=>['required','max:50'],
+    //         'email'=>['required','max:150','email'],
+    //         'password'=>['required','min:6','same:password_confirmation'],
+    //         'password_confirmation'=>['required','min:6'],
+    //         'type' => ['required','in:G,A']
+    //     ];
 
-        $validator = Validator::make($input,$rules);
+    //     $validator = Validator::make($input,$rules);
 
-        if ($validator->fails())
-        {
-            return redirect('/user/auth/sign-up')->withErrors($validator)
-                                                ->withInput();
-        }
+    //     if ($validator->fails())
+    //     {
+    //         return redirect('/user/auth/sign-up')->withErrors($validator)
+    //                                             ->withInput();
+    //     }
 
-        $input['password'] = Hash::make($input['password']);
-        $user = User::create($input);
-        //send email to do
-        $mail_binding =[
-            'nickname' => $input['name'],
-            'email' => $input['email']
-        ];
+    //     $input['password'] = Hash::make($input['password']);
+    //     $user = User::create($input);
+    //     //send email to do
+    //     $mail_binding =[
+    //         'nickname' => $input['name'],
+    //         'email' => $input['email']
+    //     ];
 
-        SendSignUpMailJob::dispatch($mail_binding)->onQueue('high');
+    //     SendSignUpMailJob::dispatch($mail_binding)->onQueue('high');
 
-        return redirect('/user/auth/sign-in');
-    }
+    //     return redirect('/user/auth/sign-in');
+    // }
     
-    // Route::get('/sign-in','UserAuthController@signInPage');
-    public function signInPage(){
+    // // Route::get('/sign-in','UserAuthController@signInPage');
+    // public function signInPage(){
         
-        return view('auth.signIn')->withTitle('登入');
-    }
+    //     return view('auth.signIn')->withTitle('登入');
+    // }
 
     // Route::post('/sign-in','UserAuthController@signInProcess');
-    public function signInProcess(){
+    // public function signInProcess(){
         
-        $input = request()->all();
-        $rules =[
-            'email'=>['required','max:150','email'],
-            'password'=>['required','min:6']
-        ];
+    //     $input = request()->all();
+    //     $rules =[
+    //         'email'=>['required','max:150','email'],
+    //         'password'=>['required','min:6']
+    //     ];
 
-        $validator = Validator::make($input,$rules);
+    //     $validator = Validator::make($input,$rules);
 
-        if ($validator->fails())
-        {
-            return redirect('/user/auth/sign-in')->withErrors($validator)
-                ->withInput();
-        }
-        //DB::enableQueryLog();
-        $User = User::where('email',$input['email'])->firstOrFail();
-        //dd(DB::getQueryLog());
-        $is_password_correct = Hash::check($input['password'],$User->password);
+    //     if ($validator->fails())
+    //     {
+    //         return redirect('/user/auth/sign-in')->withErrors($validator)
+    //             ->withInput();
+    //     }
+    //     //DB::enableQueryLog();
+    //     $User = User::where('email',$input['email'])->firstOrFail();
+    //     //dd(DB::getQueryLog());
+    //     $is_password_correct = Hash::check($input['password'],$User->password);
 
-        if(!$is_password_correct)
-        {
-            $error_msg = ['msg'=>['密碼驗證錯誤']];
-            return redirect('/user/auth/sign-in')->withErrors($error_msg)->withInput();
-        }
-        else
-        {
-            session()->put('user_id',$User->id);
-            return redirect('/');
-        }
+    //     if(!$is_password_correct)
+    //     {
+    //         $error_msg = ['msg'=>['密碼驗證錯誤']];
+    //         return redirect('/user/auth/sign-in')->withErrors($error_msg)->withInput();
+    //     }
+    //     else
+    //     {
+    //         session()->put('user_id',$User->id);
+    //         return redirect('/');
+    //     }
 
-    }
+    // }
 
     // Route::get('sign-out','UserAuthController@signOut');
-    public function signOut()
-    {
-        session()->forget('user_id');
-        return redirect('/');
-    }
+    // public function signOut()
+    // {
+    //     session()->forget('user_id');
+    //     return redirect('/');
+    // }
 
     public function facebookSignInProcess(){
         //return 'facebookSignInProcess';
@@ -168,8 +169,11 @@ class UserAuthController extends Controller
                 });
             }
         }
-
-        session()->put('user_id',$User->id);
+        
+        //$credentials = $User->only('eamil','password');
+        //dd($input);
+        Auth::login($User);
+        //session()->put('user_id',$User->id);
         //重新導向到原本使用者造訪頁面，沒有常識造訪頁則重新導向首頁
         return redirect()->intended('/');
     }

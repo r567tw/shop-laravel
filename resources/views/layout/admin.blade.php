@@ -42,7 +42,7 @@
                             </span>
                         </a>
                     </li>
-                    @if(session()->has('user_id'))
+                    @if(Auth::check())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 {{ trans('shop.transaction.name') }} <span class="caret"></span>
@@ -51,27 +51,31 @@
                                 <li><a href="/transaction">{{ trans('shop.transaction.list') }}</a></li>
                             </ul>
                         </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ trans('shop.merchandise.name') }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/admin/merchandises/create">{{ trans('shop.merchandise.create') }}</a></li>
-                                <li><a href="/admin/merchandises/manage">{{ trans('shop.merchandise.manage') }}</a></li>
+                                <li>
+                                    <form class="form-inline" action="{{ route('logout')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input class="btn" type="submit" value="{{ trans('shop.auth.sign-out') }}">
+                                    </form>
+                                </li>
                             </ul>
                         </li>
-                        <li><a href="/user/auth/sign-out">{{ trans('shop.auth.sign-out') }}</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 {{ trans('shop.auth.sign-in') }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/user/auth/sign-in">{{ trans('shop.auth.general-sign-in') }}</a></li>
+                                <li><a href="/login">{{ trans('shop.auth.general-sign-in') }}</a></li>
                                 <li><a href="/user/auth/facebook-sign-in">{{ trans('shop.auth.facebook-sign-in') }}</a></li>
                             </ul>
                         </li>
-                        <li><a href="/user/auth/sign-up">{{ trans('shop.auth.sign-up') }}</a></li>
+                        <li><a href="/register">{{ trans('shop.auth.sign-up') }}</a></li>
                     @endif
                 </ul>
             </div>
